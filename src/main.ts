@@ -1,3 +1,4 @@
+import { makePlayer, setControls } from './entities';
 import { k } from './kaboomCtx';
 import { makeMap } from './utils';
 
@@ -27,6 +28,15 @@ async function gameSetup() {
     k.add([k.rect(k.width(), k.height()), k.color(k.Color.fromHex('#f7d7db')), k.fixed()]);
 
     k.add(level1layout);
+
+    const kirb = makePlayer(k, level1SpawnPoints.player[0].x, level1SpawnPoints.player[0].y);
+
+    setControls(k, kirb);
+    k.add(kirb);
+    k.camScale(0.6, 0.6);
+    k.onUpdate(() => {
+      if (kirb.pos.x < level1layout.pos.x + 432) k.camPos(kirb.pos.x + 500, 800);
+    });
   });
 
   k.go('level-1');
