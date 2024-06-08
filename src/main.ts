@@ -19,7 +19,7 @@ async function gameSetup() {
     },
   });
 
-  k.loadSprite('level-1', '../public/level-1.png');
+  k.loadSprite('level-1', './level-1.png');
 
   const { map: level1layout, spawnPoints: level1SpawnPoints } = await makeMap(k, 'level-1');
 
@@ -49,13 +49,8 @@ async function gameSetup() {
     for (const bird of level1SpawnPoints.bird) {
       const possibleSpeeds = [100, 200, 300];
       k.loop(10, () => {
-        makeBirdEnemy(
-          k,
-          bird.x,
-          bird.y,
-          possibleSpeeds[Math.floor(Math.random() * possibleSpeeds.length)]
-        )
-      })
+        makeBirdEnemy(k, bird.x, bird.y, possibleSpeeds[Math.floor(Math.random() * possibleSpeeds.length)]);
+      });
     }
   });
 
